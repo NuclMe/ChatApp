@@ -1,0 +1,12 @@
+  spring:
+    data:
+      mongodb:
+        username: test
+        password: test
+        host: localhost
+        port: 27017
+        database: chat_app
+        authentication-databse: admin
+
+  server:
+    port: 8088
