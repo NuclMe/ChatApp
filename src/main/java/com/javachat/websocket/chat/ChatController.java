@@ -22,21 +22,21 @@ public class ChatController {
 
 
     @MessageMapping("/chat")
-        public void processMessage(
+    public void processMessage(
             @Payload ChatMessage chatMessage
-        ){
-            ChatMessage savedMsg = chatMessageService.save(chatMessage);
-            // john/queue/messages
-            messagingTemplate.convertAndSendToUser(
-                    chatMessage.getRecipientId(), "/queue/messages",
-                    ChatNotification.builder()
-                            .id(savedMsg.getId())
-                            .senderId(savedMsg.getSenderId())
-                            .recipientId(savedMsg.getRecipientId())
-                            .content(savedMsg.getContent())
-                            .build()
-            );
-        }
+    ){
+        ChatMessage savedMsg = chatMessageService.save(chatMessage);
+        // john/queue/messages
+        messagingTemplate.convertAndSendToUser(
+                chatMessage.getRecipientId(), "/queue/messages",
+                ChatNotification.builder()
+                        .id(savedMsg.getId())
+                        .senderId(savedMsg.getSenderId())
+                        .recipientId(savedMsg.getRecipientId())
+                        .content(savedMsg.getContent())
+                        .build()
+        );
+    }
 
 
     @GetMapping("/messages/{senderId}/{recipientId}")
